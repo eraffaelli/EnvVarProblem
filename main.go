@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/hex"
 	"fmt"
 	"os"
 	"strconv"
@@ -10,6 +11,18 @@ var (
 	RedisHost string
 	RedisPort string
 )
+
+func show(envvar string, val string) {
+	fmt.Println(envvar)
+	hexstr := hex.EncodeToString([]byte(val))
+	for i := 0; i < len(hexstr); i += 2 {
+		bite := hexstr[i : i+2]
+		fmt.Printf("%s ", bite)
+	}
+	fmt.Printf("= %d bytes\n", len(val))
+	fmt.Printf("= \"%s\"\n\n", val)
+}
+
 
 func init() {
 	if RedisHost = os.Getenv("REDIS_HOST"); RedisHost == "" {
@@ -53,8 +66,14 @@ func init() {
 	fmt.Printf("RedisPort : %+v\n", RedisPort)
 	fmt.Printf("%T\n", RedisHost)
 	fmt.Printf("%T\n", RedisPort)
+
+	fmt.Println("Environment from init:")
+	show("REDIS_HOST", os.Getenv("REDIS_HOST"))
+	show("REDIS_PORT", os.Getenv("REDIS_PORT"))
 }
 
 func main() {
-
+	fmt.Println("Environment from main:")
+	show("REDIS_HOST", os.Getenv("REDIS_HOST"))
+	show("REDIS_PORT", os.Getenv("REDIS_PORT"))
 }

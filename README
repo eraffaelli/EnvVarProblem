@@ -1,1 +1,6 @@
 Small example on weird concatenate problem when involving env variables in go
+
+Edit : 
+
+Fixed thanks to thoses guys on [reddit](https://old.reddit.com/r/golang/comments/bwonlv/concatenate_problem_with_env_variable/)
+The .env.dist was mysteriously created by my IDE with CR/LF encoding...
